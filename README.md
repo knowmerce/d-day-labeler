@@ -17,7 +17,7 @@ D-n 규칙에 따라 자동으로 Label 을 업데이트하는 Github Actions
 name: Update D-n Labels
 on:
   schedule:
-    - cron: '0 15 * * *' # 매일 밤 12시에 실행 (KST 기준)
+    - cron: '0 15 * * 0-4' # 평일 밤 12시에 실행 (KST 기준)
 jobs:
   d-day-labeler:
     runs-on: [ubuntu-latest]

@@ -60,6 +60,26 @@ const extractLabelChanges = (prList: TPRListData): ILabelChange[] => {
 
 const run = async (): Promise<void> => {
     try {
+        // 휴일은 쉽니다.
+        const holidays = [
+            "2024-04-10", // 국회의원 선거
+            "2024-05-01", // 근로자의 날
+            "2024-05-06", // 어린이날 대체공휴일
+            "2024-05-15", // 부처님 오신 날
+            "2024-06-06", // 현충일
+            "2024-08-15", // 광복절
+            "2024-09-16", // 추석
+            "2024-09-17", // 추석
+            "2024-09-18", // 추석
+            "2024-10-03", // 개천절
+            "2024-10-09", // 한글날
+            "2024-12-25", // 크리스마스
+        ];
+
+        const today = new Date(Date.now() + 9 * 60 * 60 * 1000).toISOString().substring(0, 10);
+
+        if (holidays.includes(today)) return;
+
         initialize();
 
         const updated = await getPRList().then(extractLabelChanges).then(updateLabels);
